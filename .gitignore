@@ -1,11 +1,11 @@
 .vscode
 cache
+__pycache__
 *.Rhistory
 *.RData
 *.Rout
 *.rdb
 *.rdx
-*__*
 *.Rproj.user*
 # System specific files
 *.DS_Store
