@@ -2,6 +2,7 @@ from Network_Module.io import url_db, C_names
 import os
 import wget
 import pandas as pd
+
 class Load_db:
     # Download jsons files and fix them to be opened as DFs
     def __init__(self, urls = url_db, name = C_names):

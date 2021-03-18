@@ -11,6 +11,7 @@ Pour cela il faut executer les commandes suivantes dans le terminal anaconda pro
 
 # %%
 import Network_Module as nm
-df =nm.Load_db().save_as_df("Albert 1er")
-print(df)
+
+df=nm.Load_db.Load_db().save_as_df("Albert 1er")
+df
 # %%
