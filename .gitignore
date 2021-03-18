@@ -38,3 +38,6 @@
 *_minted*
 # Xournalpp
 *.xopp
+.vscode
+cache
+
