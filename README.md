@@ -1,23 +1,23 @@
-# Projet de groupe "Simulation du réseau cyclable de Montpellier"
-## Membre de l'équipe :
+# Group project "Simulation du réseau cyclable de Montpellier"
+## Group members :
  * Alleau Julie : julie.alleau@etu.umontpellier.fr 
  * Chaoui Wiam : wiam.chaoui@etu.umontpellier.fr
  * Poncheele Clement : clement.poncheele@etu.umontpellier.fr
  * Seck, Gade : gade.seck@etu.umontpellier.fr
 
-## Description du projet :
+## Description  :
 
-Le but de ce projet est de créer un module Python (qui peut être importé avec pip) qui est capable de produire des vidéos du flux dans la ville de Montpellier pendant une semaine complète.
+The end goal of this project is to create a Python module (that can be imported with pip) that is able to produce videos of the flow in the city of Montpellier during a whole week .
 
-## Répartiotion des taches :
+## Tasks distribution  :
 
-* traitement des données -> Clement et Julie 
-* Création d'un module permettant de modéliser les trafics : -> Clement ,Julie et Gade 
-    - Les vélos 
-    - Les routes 
-    - Les trajets des vélos (aleatoires) 
-* Visualisation des trafics -> Clement ,Julie et Wiam
-* relecture pep8/Documentation -> Everybody 
+* Data processing -> Clement et Julie 
+* Creation of a module that will allow traffic modeling : -> Clement ,Julie et Gade 
+    - Bicycles 
+    - The roads
+    - Bicycle routes (Random) 
+* The traffic's visualization  -> Clement ,Julie et Wiam
+* pep8/Documentation -> Everybody 
 * Tests -> Gade et Wiam
 
 
