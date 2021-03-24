@@ -13,9 +13,9 @@ Le but de ce projet est de créer un module Python (qui peut être importé avec
 
 * traitement des données -> Clement et Julie 
 * Création d'un module permettant de modéliser les trafics : -> Clement ,Julie et Gade 
-- Les vélos 
-- Les routes 
-- Les trajets des vélos (aleatoires) 
+    - Les vélos 
+    - Les routes 
+    - Les trajets des vélos (aleatoires) 
 * Visualisation des trafics -> Clement ,Julie et Wiam
 * relecture pep8/Documentation -> Everybody 
 * Tests -> Gade et Wiam
