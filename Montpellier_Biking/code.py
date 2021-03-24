@@ -6,8 +6,8 @@ Pour cela il faut executer les commandes suivantes dans le terminal anaconda pro
 
 
 #%%
-#import osmnx as ox
-#ox.plot_graph(ox.graph_from_place('montpellier, France'))
+import osmnx as ox
+ox.plot_graph(ox.graph_from_place('montpellier, France'))
 
 # %%
 import Network_Module as nm
