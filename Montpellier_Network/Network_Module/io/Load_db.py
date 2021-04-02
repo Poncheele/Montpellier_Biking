@@ -2,6 +2,7 @@ from Network_Module.io import url_db, C_names
 import os
 import wget
 import pandas as pd
+
 class Load_db:
     # Download jsons files and fix them to be opened as DFs
     def __init__(self, urls = url_db, name = C_names):
@@ -10,12 +11,12 @@ class Load_db:
         path_target_txt = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "data/compteurs", name[i]+".txt")
         if os.path.isfile(path_target_txt):
           os.remove(path_target_txt)    
-        fs = wget.download(url, path_target_txt)
+        wget.download(url, path_target_txt)
         path_target2 = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "data/compteurs", name[i]+".json")
         file = open(path_target_txt, "r")
         if os.path.isfile(path_target2):
           os.remove(path_target2)
-        newfile = open(path_target2,'x')
+        newfile = open(path_target2, 'x')
         for line in file:
             newfile.write(line.replace('}{','}\n{'))
         file.close()
