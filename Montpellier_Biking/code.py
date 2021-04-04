@@ -19,8 +19,9 @@ G = ox.graph_from_place('montpellier, France','bike')
 
 # %%
 import Network_Module as nm
-df =nm.Load_db().save_as_df("Albert 1er")
-print(df)
+
+df=nm.Load_db.Load_db().save_as_df("Albert 1er")
+df
 # %%
 # Consolidate intersections (combine complex nodes)
 G_proj = ox.project_graph(G)

@@ -32,22 +32,6 @@ for i in range (7):
     nodes.append(ox.distance.get_nearest_node(G, l[i]))
     routes.append(nx.shortest_path(G,nodes[i], comedie_node))
 
-
-# fig, ax = ox.plot_graph_routes(G, routes, route_colors="y", node_size = 0)
-
-
-# fig, ax = ox.plot_graph_routes(G, routes, node_size = 0, show=False, close=False)
-# x_r= (G.nodes[267851583]['x'], G.nodes[6255493123]['x'])
-# y_r = (G.nodes[267851583]['y'], G.nodes[6255493123]['y'])
-# ax.scatter(x_r , y_r
-#                 , s=100,
-#                c='y', alpha=0.5, edgecolor='none', zorder=4)
-
-# plt.show()
-
-
-
-# from matplotlib.collections import LineCollection
 from matplotlib.animation import FuncAnimation
 # from IPython.display import HTML
 # from matplotlib import rc

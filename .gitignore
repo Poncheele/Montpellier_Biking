@@ -1,11 +1,11 @@
 .vscode
 cache
+__pycache__
 *.Rhistory
 *.RData
 *.Rout
 *.rdb
 *.rdx
-*__*
 *.Rproj.user*
 # System specific files
 *.DS_Store
@@ -40,9 +40,5 @@ cache
 *_minted*
 # Xournalpp
 *.xopp
-<<<<<<< HEAD
-.vscode
-cache
-=======
->>>>>>> bf1d85b6c1a5b5271ec06f7bb9d97a60c3a17830
+*.json
 
