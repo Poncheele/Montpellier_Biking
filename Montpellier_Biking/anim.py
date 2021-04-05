@@ -35,7 +35,7 @@ nodes = []
 routes = []
 
 
-#%%
+# %%
 ############################ for consol ############################
 for i in range(len(liste)):
     nodes.append(ox.distance.get_nearest_node(G, liste[i]))
