@@ -67,16 +67,15 @@ from matplotlib import animation
 from matplotlib import rc
 #import ffmpeg
 
-fig, ax = ox.plot_graph_routes(G, routes, 'blue', node_size=0, show=False,
-                               close=False)
-pic = ax.scatter(G.nodes[routes[2][0]]['x'], G.nodes[routes[2][0]]['y'], s=20,
-                 c='y', alpha=1, edgecolor='none', zorder=4)
+
 
 for i in range(len(liste)):
     nodes.append(ox.distance.get_nearest_node(G, liste[i]))
     routes.append(nx.shortest_path(G, nodes[i], Comedie_node))
-    
-
+    fig, ax = ox.plot_graph_routes(G, routes, node_size=0, show=False,
+                               close=False)
+    pic = ax.scatter(G.nodes[routes[1][0]]['x'], G.nodes[routes[1][0]]['y'], s=20,
+             c='y', alpha=1, edgecolor='none', zorder=4)
     def animate(i):
         pic.set_offsets(((G.nodes[routes[2][i]]['x'],
                           G.nodes[routes[2][i]]['y']),
@@ -85,7 +84,6 @@ for i in range(len(liste)):
                          (G.nodes[routes[4][i]]['x'],
                           G.nodes[routes[4][i]]['y'])))
         return pic
-
     ani = FuncAnimation(fig, animate, frames=len(routes[4]), interval=100)
 
 rc('animation', html='jshtml')
