@@ -14,13 +14,13 @@ ox.config(use_cache=True, log_console=True)
 G = ox.graph_from_place('Montpellier, France', 'bike')
 # %%
 
-Albert1er_point = (43.61620945549243, 3.874408006668091)
 Albert1er_node = ox.distance.get_nearest_node(G, Albert1er_point)
 point = (43.61465, 3.8336)
 x_node = ox.distance.get_nearest_node(G, point)
 Comedie = ox.geocoder.geocode('Place de la comédie, Montpellier, France')
 Comedie_node = ox.distance.get_nearest_node(G, Comedie)
 
+Albert1er = (43.61620945549243, 3.874408006668091)
 Beracasa = (43.60969924926758, 3.896939992904663)
 Celleneuve = (43.61465, 3.8336)
 Delmas = (43.6266977, 3.8956288)
@@ -52,14 +52,15 @@ for i in range(len(liste)):
                      s=20, c='y', alpha=1, edgecolor='none', zorder=4)
 
 # inspired by code source of https://github.com/gboeing/osmnx/blob/master/osmnx/plot.py 
-    def animate(i):
-        pic.set_offsets((G.nodes[route0[i+1]]['x'], G.nodes[route0[i+1]]['y']))
-        return pic
+def animate(i):
+    pic.set_offsets((G.nodes[route0[i+1]]['x'], G.nodes[route0[i+1]]['y']))
+    return pic
 
 
-    ani = FuncAnimation(fig, animate, frames=len(route0)-1, interval=100,
+ani = FuncAnimation(fig, animate, frames=len(route0)-1, interval=100,
                         repeat=True)
-    plt.show()
+plt.show()
+
 # %%
 ############################ for jupyter ############################
 from IPython.display import HTML
