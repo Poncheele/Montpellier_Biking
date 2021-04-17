@@ -74,21 +74,19 @@ class Counter():
     def generate_random_route(self):
         """
         Generate a random route that goes through the counter
-
         Parameters
         ----------
         Counter :
         Counter : a Montpellier_Biking Counter
-
         Returns
         -------
         Path : list of nodes
         """
         start = np.random.choice(G.nodes)
         end = np.random.choice(G.nodes)
-        route = nx.shortest_path(G, start, self)
+        route = nx.shortest_path(G, start, self.node)
         if self.out == False:
-            route = route.append(nx.shortest_path(G, self, end))
+                route.extend(nx.shortest_path(G, self.node, end)[1:])
         return route
 
 

@@ -1,9 +1,12 @@
+
 import Network_Module as nm
 import osmnx as ox
 import matplotlib.pyplot as plt
 import numpy as np
+from Network_Module.counters import Counter
 # from matplotlib import animation
 # from matplotlib import rc
+
 
 G = nm.model.G
 
@@ -13,7 +16,7 @@ counters = nm.model.counters.counter_list
 
 listx = nm.counters.Counter.x_list(counters)
 listy = nm.counters.Counter.y_list(counters)
-pic = ax.scatter(listx,listy , s=20,
+pic = ax.scatter(listx,listyx , s=20,
                  c='y', alpha=1, edgecolor='none', zorder=4)
 
 plt.show()
