@@ -171,4 +171,8 @@ for i in range(len(route0)):
                c='y', alpha=0.5, edgecolor='none', zorder=4)
     plt.show()
 # %%
+import numpy as np
+np.random.rand(2)
+# %%
 
+# %%
