@@ -1,4 +1,4 @@
-from Network_Module.io import url_db, C_names
+from Montpellier_Biking.io import url_db, C_names
 import os
 import wget
 import pandas as pd
