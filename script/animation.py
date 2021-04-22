@@ -1,4 +1,3 @@
-#%%
 import matplotlib.pyplot as plt
 import matplotlib.animation as ma
 import osmnx as ox
