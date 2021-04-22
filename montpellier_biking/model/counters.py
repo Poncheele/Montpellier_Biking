@@ -1,4 +1,4 @@
-from Montpellier_Biking.model import G
+from montpellier_biking.model import G
 import osmnx as ox
 import numpy as np
 import networkx as nx

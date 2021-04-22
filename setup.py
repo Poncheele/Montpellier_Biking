@@ -1,8 +1,9 @@
 from setuptools import setup
+from montpellier_biking import __version__ as current_version
 
 setup(
   name='montpellier_biking',
-  version='0.0.1',
+  version=current_version,
   description='Visualization of the bicycle flux in Montpellier',
   url='https://github.com/Poncheele/Montpellier_Biking',
   author='Alleau Julie, Chaoui Wiam, Poncheele Clement et Seck, Gade',
