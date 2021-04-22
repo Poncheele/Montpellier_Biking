@@ -63,3 +63,51 @@ nonzeroind = np.nonzero(a)[0] # the return is a little funny so I use the [0]
 print(nonzeroind)
 
 
+#%%
+
+M = Counter.set_matrix(Laverune)
+
+
+
+# ############### VIS_TEST #################
+
+
+fig, ax = ox.plot_graph(G, node_size=0, show=False)
+fig.set_size_inches(20, 20)
+plt.show()
+pic = ax.scatter(Counter.x_node(Albert1er), Counter.y_node(Albert1er), s=10,
+                 c='b', alpha=1, edgecolor='none', zorder=4)
+pic2 = ax.scatter(2, 3, s=10, c='y', alpha=1)
+
+
+def animate(i):
+    pic.set_offsets(Counter.route_to_scatter(M[i, :][M[i, :] > 0]))
+    return pic
+
+
+ani = FuncAnimation(fig, animate, frames=400,
+                    interval=20, blit=False, repeat=False)
+
+
+plt.show()
+# f = r"test.avi" 
+# writervideo = animation.FFMpegWriter(fps=30) 
+# ani.save(f, writer=writervideo)
+
+# M = Counter.set_matrix(Albert1er)
+
+
+# %%
+fig, ax = ox.plot_graph_route(G,chem)
+ax.scatter(Counter.x_node(Lattes),Counter.y_node(Lattes), s=30)
+plt.show()
+# %%
+F = ox.geocoder.geocode_to_gdf('Montpellier, France')
+
+
+#%%
+Counter.generate_random_route(Lattes)
+
+#%%
+chem = random_walk(G, Lattes.node)
+# %%

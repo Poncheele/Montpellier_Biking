@@ -1,15 +1,21 @@
-from Montpellier_Biking.model import G
 import osmnx as ox
-import networkx as nx
 import numpy as np
+from copy import deepcopy
+import networkx as nx
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import matplotlib.animation as animation
+G = ox.graph_from_place('Montpellier, France', 'bike')
 
 
 class Counter():
 
+    bike_distribution = [0.05, 0.05, 0.1, 0.1, 0.1, 0.1, 0.5,
+                         5, 9, 7, 7, 6, 6, 6, 6, 6, 9, 9, 8, 5, 4, 3, 2, 1]
+
     def __init__(self, coordinates, node, name, bikes=0, out=False):
         """
         An eco-counter of Montpellier
-
         Parameters
         ----------
         coordinates : Point # the real coordinate
@@ -89,26 +95,89 @@ class Counter():
                 path = True
             except Exception:
                 start = np.random.choice(G.nodes)
+        if len(route) > 120:
+            route = route[len(route)-110:]
+        lengh = len(route)
         if self.out is False:
+            path = False
             end = np.random.choice(G.nodes)
             while path is False:
                 try:
-                    route.append(nx.shortest_path(G, end, self.node))
+                    route.extend(nx.shortest_path(G,
+                                 self.node, end)[1:])
                     path = True
                 except Exception:
                     end = np.random.choice(G.nodes)
-        return route
+        return route, lengh
 
     def route_to_scatter(route):
-        scatter_list = []
-        for j in range(len(route)):
-            scatter = [G.nodes[route[j]]['x'], G.nodes[route[j]]['y']]
-            scatter_list.append(scatter)
-        return scatter_list
+        """
+        Transform a list of node into a list of (x,y) plot coordinates
+        Parameters
+        ----------
+        route: list of node
+        Returns
+        -------
+        scatter list: list of plot coordinates
+        """
+        if len(route) != 0:
+            scatter_list = []
+            for j in range(len(route)):
+                scatter = [G.nodes[route[j]]['x'], G.nodes[route[j]]['y']]
+                scatter_list.append(scatter)
+            return scatter_list
+
+    def set_matrix(self):
+        """
+        set passing bike matrix for one day
+        Parameters
+        ----------
+        Counter
+        Returns
+        -------
+        numpy matrix: each raw is a frame, each colum is a route.
+        """
+        M1 = np.zeros((2880, 2880))
+        for j in range(24):
+            i = 0
+            while i <= Counter.bike_distribution[j]*self.bikes/100:
+                route, lengh = Counter.generate_random_route(self)
+                try:  # random bike passing time
+                    random_pass = np.random.randint(low=120*j+lengh,
+                                                    high=120*(j+1))
+                    M1[random_pass-(lengh):random_pass+len(route)-lengh,
+                       i+j*120] = route
+                except Exception:  # last hour can't exceed 2880
+                    random_pass = np.random.randint(low=min(len(route)+120*23,
+                                                    120*24-1), high=120*24)
+                    M1[random_pass-len(route):random_pass, i+j*120] = route
+                i += 1
+        return M1
+
+    def list_for_ani(c_list):
+        """
+        Set the simulation for each counter
+        Parameters
+        ----------
+        list of counter
+        Returns
+        -------
+        list of node list
+        """
+        anim_list = []
+        # set list for the first counter
+        M = Counter.set_matrix(c_list[0])
+        for i in range(len(M)):
+            anim_list.append(M[i, :][M[i, :] > 0])
+        # extends lists with other counters
+        for c in c_list[1:]:
+            M = Counter.set_matrix(c)
+            for i in range(len(M)):
+                anim_list[i] = np.hstack((anim_list[i], M[i, :][M[i, :] > 0]))
+        return anim_list
 
 
 # Number of bike the 04-15
-
 Albert1er = Counter(coordinates=(43.61620945549243,
                     3.874408006668091),
                     node=ox.distance.get_nearest_node(G,
@@ -131,9 +200,9 @@ Gerhardt = Counter(coordinates=(43.6138841, 3.8684671),
                    node=ox.distance.get_nearest_node(G,
                    (43.6138841, 3.8684671)),
                    bikes=1109, name="Gerhardt")
-Lattes = Counter(coordinates=(43.5728796, 3.9460064),
+Lattes = Counter(coordinates=(43.5915, 3.90473),
                  node=ox.distance.get_nearest_node(G,
-                 (43.5728796, 3.9460064)),
+                 (43.5915, 3.90473)),
                  bikes=648, name="Lattes", out=True)
 Laverune = Counter(coordinates=(43.5907, 3.81324),
                    node=ox.distance.get_nearest_node(G,
@@ -144,33 +213,48 @@ Vielle_poste = Counter(coordinates=(43.6157418, 3.9096322),
                        (43.6157418, 3.9096322)),
                        bikes=283, name="Vielle_poste", out=True)
 
-counter_list = [Albert1er, Beracasa, Celleneuve, Delmas, Gerhardt,  # Lattes,
+counter_list = [Albert1er, Beracasa, Celleneuve, Delmas, Gerhardt, Lattes,
                 Laverune, Vielle_poste]
 
-bike_distribution = [0.05, 0.05, 0.1, 0.1, 0.1, 0.1, 0.5,
-                     5, 9, 7, 7, 6, 6, 6, 6, 6, 9, 9, 8, 5, 4, 3, 2, 1]
 
-M1 = np.zeros((2000, 2000))
+list_c = [Celleneuve, Lattes]
+
+anim_list2 = []
+for i in range(len(M)):
+    anim_list2.append(M[i, :][M[i, :] > 0])
 
 
-for i in range(Albert1er.bikes):
-    route = Counter.generate_random_route(Albert1er)
-    M1[i:i+len(route), i] = route
+for i in range(len(M)):
+    anim_list[i] = np.hstack((anim_list[i],anim_list2[i]))
 
-############### VIS_TEST #################
 
+import time
+start_time = time.time()
+megal = Counter.list_for_ani(counter_list)
+print(time.time() - start_time)
+mega = megal[1500:]
+
+start_time = time.time()
 fig, ax = ox.plot_graph(G, node_size=0, show=False)
-pic = ax.scatter(Counter.x_node(Albert1er), Counter.y_node(Albert1er), s=20,
-                 c='y', alpha=1, edgecolor='none', zorder=4)
+fig.set_size_inches(20, 20)
+pic = ax.scatter(Counter.x_node(Albert1er), Counter.y_node(Albert1er), s=10,
+                 c='b', alpha=1, edgecolor='none', zorder=4)
+pic2 = ax.scatter(2, 3, s=10, c='y', alpha=1)
+
 
 
 def animate(i):
-    pic.set_offsets(Counter.route_to_scatter(M1[i, :][M1[i, :] > 0]))
+    pic.set_offsets(Counter.route_to_scatter(mega[i]))
     return pic
 
 
-ani = FuncAnimation(fig, animate, frames=Albert1er.bikes,
-                    interval=10, blit=False)
+ani = FuncAnimation(fig, animate, frames=200,
+                    interval=100, blit=False, repeat=False)
 
-plt.show()
 
+#plt.show()
+f = r"test.avi" 
+writervideo = animation.FFMpegWriter(fps=10) 
+ani.save(f, writer=writervideo)
+
+print(time.time() - start_time)
