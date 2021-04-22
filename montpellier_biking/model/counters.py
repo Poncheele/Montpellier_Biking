@@ -1,11 +1,7 @@
+from Montpellier_Biking.model import G
 import osmnx as ox
 import numpy as np
-from copy import deepcopy
 import networkx as nx
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
-import matplotlib.animation as animation
-G = ox.graph_from_place('Montpellier, France', 'bike')
 
 
 class Counter():
@@ -215,46 +211,3 @@ Vielle_poste = Counter(coordinates=(43.6157418, 3.9096322),
 
 counter_list = [Albert1er, Beracasa, Celleneuve, Delmas, Gerhardt, Lattes,
                 Laverune, Vielle_poste]
-
-
-list_c = [Celleneuve, Lattes]
-
-anim_list2 = []
-for i in range(len(M)):
-    anim_list2.append(M[i, :][M[i, :] > 0])
-
-
-for i in range(len(M)):
-    anim_list[i] = np.hstack((anim_list[i],anim_list2[i]))
-
-
-import time
-start_time = time.time()
-megal = Counter.list_for_ani(counter_list)
-print(time.time() - start_time)
-mega = megal[1500:]
-
-start_time = time.time()
-fig, ax = ox.plot_graph(G, node_size=0, show=False)
-fig.set_size_inches(20, 20)
-pic = ax.scatter(Counter.x_node(Albert1er), Counter.y_node(Albert1er), s=10,
-                 c='b', alpha=1, edgecolor='none', zorder=4)
-pic2 = ax.scatter(2, 3, s=10, c='y', alpha=1)
-
-
-
-def animate(i):
-    pic.set_offsets(Counter.route_to_scatter(mega[i]))
-    return pic
-
-
-ani = FuncAnimation(fig, animate, frames=200,
-                    interval=100, blit=False, repeat=False)
-
-
-#plt.show()
-f = r"test.avi" 
-writervideo = animation.FFMpegWriter(fps=10) 
-ani.save(f, writer=writervideo)
-
-print(time.time() - start_time)
