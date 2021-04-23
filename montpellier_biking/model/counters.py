@@ -2,26 +2,31 @@ from montpellier_biking.model import G
 import osmnx as ox
 import numpy as np
 import networkx as nx
+
 #from numba import jit
 #import time
+
+from scipy import sparse
 
 
 
 class Counter():
-
+    """
+    An eco-counter of Montpellier
+    Parameters
+    ----------
+    coordinates : Point # the real coordinate
+    node : graph node, the nearest node from the counter
+    bikes : int, number of bike passing
+    name : string, counter's name
+    out : bool, True if the counter is out of Montpellier city
+    """
     bike_distribution = [0.05, 0.05, 0.1, 0.1, 0.1, 0.1, 0.5,
                          5, 9, 7, 7, 6, 6, 6, 6, 6, 9, 9, 8, 5, 4, 3, 2, 1]
 
     def __init__(self, coordinates, node, name, bikes=0, out=False):
         """
-        An eco-counter of Montpellier
-        Parameters
-        ----------
-        coordinates : Point # the real coordinate
-        node : graph node, the nearest node from the counter
-        bikes : int, number of bike passing
-        name : string, counter's name
-        out : bool, True if the counter is out of Montpellier city
+        construction method
         """
         self.coordinates = coordinates
         self.node = node
@@ -41,7 +46,6 @@ class Counter():
         """
         return G.nodes[self.node]['y']
 
-    
     def x_list(counter_list):
         """
         Returns a list of x coordinates of a counter list
@@ -151,7 +155,7 @@ class Counter():
                                                     120*24-1), high=120*24)
                     M1[random_pass-len(route):random_pass, i+j*120] = route
                 i += 1
-        return M1
+        return sparse.csr_matrix(M1)
 
     def list_for_ani(c_list):
         """
@@ -161,18 +165,21 @@ class Counter():
         list of counter
         Returns
         -------
-        list of node list
+        anim_list: list of node list,
+        all nodes who need to be plotted at time i
+        count_list: list of list that contain the number of bike,
+        passed at the time i
         """
         anim_list = []
         # set list for the first counter
         M = Counter.set_matrix(c_list[0])
-        for i in range(len(M)):
-            anim_list.append(M[i, :][M[i, :] > 0])
+        for i in range(M.shape[0]):
+            anim_list.append(M[i].data)
         # extends lists with other counters
         for c in c_list[1:]:
             M = Counter.set_matrix(c)
-            for i in range(len(M)):
-                anim_list[i] = np.hstack((anim_list[i], M[i, :][M[i, :] > 0]))
+            for i in range(M.shape[0]):
+                anim_list[i] = np.hstack((anim_list[i], M[i].data))
         return anim_list
 
 
@@ -208,7 +215,7 @@ Laverune = Counter(coordinates=(43.5907, 3.81324),
                    node=ox.distance.get_nearest_node(G,
                    (43.5907, 3.81324)),
                    bikes=302, name="Laverune", out=True)
-Vielle_poste = Counter(coordinates=(43.6157418, 3.9096322),
+Vieille_poste = Counter(coordinates=(43.6157418, 3.9096322),
                        node=ox.distance.get_nearest_node(G,
                        (43.6157418, 3.9096322)),
                        bikes=283, name="Vielle_poste", out=True)
@@ -216,7 +223,8 @@ Vielle_poste = Counter(coordinates=(43.6157418, 3.9096322),
 counter_list = [Albert1er, Beracasa, Celleneuve, Delmas, Gerhardt, Lattes,
                 Laverune, Vielle_poste]
 
-#
+
 #start_time = time.time()
 #Counter.set_matrix(Albert1er)
 #print(time.time() - start_time)
+
