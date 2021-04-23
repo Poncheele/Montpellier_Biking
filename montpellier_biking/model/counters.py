@@ -1,5 +1,4 @@
 from montpellier_biking.model import G
-import osmnx as ox
 import numpy as np
 import networkx as nx
 from scipy import sparse
@@ -135,7 +134,7 @@ class Counter():
         -------
         numpy matrix: each raw is a frame, each colum is a route.
         """
-        M1 = np.zeros((2880, 2880))
+        M1 = np.zeros((2800, 2800))
         for j in range(24):
             i = 0
             while i <= Counter.bike_distribution[j]*self.bikes/100:
@@ -146,9 +145,14 @@ class Counter():
                     M1[random_pass-(lengh):random_pass+len(route)-lengh,
                        i+j*120] = route
                 except Exception:  # last hour can't exceed 2880
-                    random_pass = np.random.randint(low=min(len(route)+120*23,
-                                                    120*24-1), high=120*24)
+                    random_pass = np.random.randint(low=min(len(route)+120*j,
+                                                    120*(j+1)-1),
+                                                    high=120*(j+1))
+                    print(len(route))
+                    print(len(M1[random_pass-len(route):random_pass, i+j*120]))
+                    print(random_pass)
                     M1[random_pass-len(route):random_pass, i+j*120] = route
+
                 i += 1
         return sparse.csr_matrix(M1)
 
@@ -176,46 +180,3 @@ class Counter():
             for i in range(M.shape[0]):
                 anim_list[i] = np.hstack((anim_list[i], M[i].data))
         return anim_list
-
-
-# Number of bike the 04-15
-Albert1er = Counter(coordinates=(43.61620945549243,
-                    3.874408006668091),
-                    node=ox.distance.get_nearest_node(G,
-                    (43.61620945549243, 3.874408006668091)),
-                    bikes=1569, name="Albert1er")
-
-Beracasa = Counter(coordinates=(43.60969924926758, 3.896939992904663),
-                   node=ox.distance.get_nearest_node(G,
-                   (43.60969924926758, 3.896939992904663)),
-                   bikes=1376, name="Beracasa")
-Celleneuve = Counter(coordinates=(43.61465, 3.8336),
-                     node=ox.distance.get_nearest_node(G,
-                     (43.61465, 3.8336)), bikes=638,
-                     name="Celleneuve")
-Delmas = Counter(coordinates=(43.6266977, 3.8956288),
-                 node=ox.distance.get_nearest_node(G,
-                 (43.6266977, 3.8956288)),
-                 bikes=725, name="Delmas", out=True)
-Gerhardt = Counter(coordinates=(43.6138841, 3.8684671),
-                   node=ox.distance.get_nearest_node(G,
-                   (43.6138841, 3.8684671)),
-                   bikes=1109, name="Gerhardt")
-Lattes = Counter(coordinates=(43.5915, 3.90473),
-                 node=ox.distance.get_nearest_node(G,
-                 (43.5915, 3.90473)),
-                 bikes=648, name="Lattes", out=True)
-Laverune = Counter(coordinates=(43.5907, 3.81324),
-                   node=ox.distance.get_nearest_node(G,
-                   (43.5907, 3.81324)),
-                   bikes=302, name="Laverune", out=True)
-Vieille_poste = Counter(coordinates=(43.6157418, 3.9096322),
-                       node=ox.distance.get_nearest_node(G,
-                       (43.6157418, 3.9096322)),
-                       bikes=283, name="Vielle_poste", out=True)
-
-counter_list = [Albert1er, Beracasa, Celleneuve, Delmas, Gerhardt, Lattes,
-                Laverune, Vieille_poste]
-
-
-
