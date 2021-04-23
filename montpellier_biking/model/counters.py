@@ -2,6 +2,7 @@ from montpellier_biking.model import G
 import numpy as np
 import networkx as nx
 from scipy import sparse
+import time
 
 
 class Counter():
@@ -124,9 +125,9 @@ class Counter():
                 scatter_list.append(scatter)
             return scatter_list
 
-    def set_matrix(self):
+    def set_matrix(self, quality = 2880):
         """
-        set passing bike matrix for one day
+        Set passing bike matrix for one day
         Parameters
         ----------
         Counter
@@ -134,7 +135,7 @@ class Counter():
         -------
         numpy matrix: each raw is a frame, each colum is a route.
         """
-        M1 = np.zeros((2800, 2800))
+        M1 = np.zeros((quality, quality))
         for j in range(24):
             i = 0
             while i <= Counter.bike_distribution[j]*self.bikes/100:
@@ -145,14 +146,13 @@ class Counter():
                     M1[random_pass-(lengh):random_pass+len(route)-lengh,
                        i+j*120] = route
                 except Exception:  # last hour can't exceed 2880
-                    random_pass = np.random.randint(low=min(len(route)+120*j,
-                                                    120*(j+1)-1),
-                                                    high=120*(j+1))
-                    print(len(route))
-                    print(len(M1[random_pass-len(route):random_pass, i+j*120]))
-                    print(random_pass)
-                    M1[random_pass-len(route):random_pass, i+j*120] = route
-
+                    try:
+                        random_pass = np.random.randint(low=min(len(route)+120*j,
+                                                        120*(j+1)-1),
+                                                        high=120*(j+1))
+                        M1[random_pass-len(route):random_pass, i+j*120] = route
+                    except Exception:
+                        pass
                 i += 1
         return sparse.csr_matrix(M1)
 
@@ -176,7 +176,9 @@ class Counter():
             anim_list.append(M[i].data)
         # extends lists with other counters
         for c in c_list[1:]:
+            t = time.time()
             M = Counter.set_matrix(c)
             for i in range(M.shape[0]):
                 anim_list[i] = np.hstack((anim_list[i], M[i].data))
+            print(time.time()-t)
         return anim_list

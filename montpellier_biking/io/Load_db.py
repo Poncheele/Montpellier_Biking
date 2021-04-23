@@ -49,7 +49,7 @@ class Load_db:
     @staticmethod
     def save_as_df(name):
         """
-        Open json as a dataframe
+        Open json as a dataframe, date starts the 2021-01-04
         Parameters
         ----------
         String: name of the counter
@@ -91,6 +91,17 @@ class Load_db:
         data_total['week'] = data_total.index.week
         return data_total
 
-    # @staticmethod
-    # def df_hist_plot_total(df):
-        
+    def bikes_list(self, df, week, day):
+        """
+        Gives the list of number of bikes passed the day for every counter.
+        Parameters:
+        -----------
+        df: dataframe with all counters, mean, weekday, and week (use set_df)
+        week: int between 1 and 12 the week's number of 2021
+        day: int, day of the week (ex: 0 means monday)
+        Returns:
+        --------
+        int list: number of bikes passed the day for every counter
+        """
+        temp = df[df['weekday'] == day]
+        return list(temp[temp['week'] == week].iloc[0, 0:8])
