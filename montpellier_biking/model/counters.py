@@ -2,6 +2,9 @@ from montpellier_biking.model import G
 import osmnx as ox
 import numpy as np
 import networkx as nx
+#from numba import jit
+#import time
+
 
 
 class Counter():
@@ -38,7 +41,7 @@ class Counter():
         """
         return G.nodes[self.node]['y']
 
-    @staticmethod
+    
     def x_list(counter_list):
         """
         Returns a list of x coordinates of a counter list
@@ -122,7 +125,7 @@ class Counter():
                 scatter = [G.nodes[route[j]]['x'], G.nodes[route[j]]['y']]
                 scatter_list.append(scatter)
             return scatter_list
-
+    
     def set_matrix(self):
         """
         set passing bike matrix for one day
@@ -173,6 +176,7 @@ class Counter():
         return anim_list
 
 
+
 # Number of bike the 04-15
 Albert1er = Counter(coordinates=(43.61620945549243,
                     3.874408006668091),
@@ -211,3 +215,8 @@ Vielle_poste = Counter(coordinates=(43.6157418, 3.9096322),
 
 counter_list = [Albert1er, Beracasa, Celleneuve, Delmas, Gerhardt, Lattes,
                 Laverune, Vielle_poste]
+
+#
+#start_time = time.time()
+#Counter.set_matrix(Albert1er)
+#print(time.time() - start_time)

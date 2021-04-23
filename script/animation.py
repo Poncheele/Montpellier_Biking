@@ -8,6 +8,7 @@ import time
 import datetime
 
 
+
 start_time = time.time()
 megal = mb.counters.Counter.list_for_ani(mb.counters.counter_list)
 print(time.time() - start_time)
@@ -33,6 +34,7 @@ hour = ax.text(3.8075, 43.57, "00:00:00", c='w')
 for i in range(len(count_list)):
     text_list.append(ax.text(3.903, 43.57+0.0025*i,
                      count_str_list[i]+str(0), c='w'))
+                     
 
 
 def animate(i):
