@@ -3,7 +3,7 @@ t = time.time()
 import tkinter as tk
 import tkinter.messagebox
 from PIL import Image, ImageTk
-import montpellier_biking as mb
+#import montpellier_biking as mb
 print(time.time()-t)
 
 class Application():
@@ -12,6 +12,7 @@ class Application():
 
     def __init__(self):
         self.root = tk.Tk()
+        self.root.geometry('1230x700')
         self.week = Application.week
         # self.root.geometry('1800x1500')
         self.init_image()
@@ -27,41 +28,47 @@ class Application():
         self.img = ImageTk.PhotoImage(Image.open(self.img_rep+"0.png"))
 
     def init_widgets(self):
-        self.label = tk.Label(self.root, text="J'adore Python !")
-        self.listbox = tk.Listbox(activestyle='dotbox')
+        # init listbox
+        self.listbox = tk.Listbox(activestyle='dotbox', height=13)
         self.listbox.insert(1, "01/04-04/28")
-        for i in range(1, 13):  # init listbox
+        for i in range(1, 13): 
             self.listbox.insert(i, "week "+str(i))
-        self.bouton = tk.Button(self.root, text="Quitter", command=self.root.destroy)
-        self.bouton_vid = tk.Button(self.root, text="Make Video!",
-                                    command=self.callbakc_vid)
-        self.my_label = tk.Label(self.root, image=self.img)
-        self.my_label.pack(side=tk.TOP)
         self.listbox.bind("<<ListboxSelect>>", self.callback_list)
-        self.listbox.pack()
-        self.bouton_vid.pack()
-        self.label.pack()
-        self.bouton.pack()
         self.lng = Checkbar(self.root, ['0: Monday', '1: Tuesday',
                                         '2: Wednesday', '3: Thursday',
                                         '4: Friday', '5: Saturday',
                                         '6: Sunday'])
-        self.label.pack()
-        self.bouton.pack()
-        self.lng.pack()
+        self.label_text1 = tk.Label(text="Select day: ")
+        self.bouton = tk.Button(self.root, text="Quit",
+                                command=self.root.destroy)
+        self.bouton_vid = tk.Button(self.root, text="Make Video!",
+                                    command=self.callbakc_vid)
+        self.my_label = tk.Label(self.root, image=self.img)
+        # Set widget position
+        self.my_label.place(x=0, y=0)
+        self.listbox.place(x=1105, y=0)
+        self.bouton.place(x=1190, y=639)
+        self.bouton_vid.place(x=1103, y=639)
 
     def callbakc_vid(self):
-        if self.week != 0 and self.selected_days != [0]*7:
-            load = mb.Load_db.Load_db()
-            data = load.set_df()
-            for i in range(len(self.selected_days)):
-                if self.selected_days[i] == 1:
-                    mb.vis.animation.Animation(load.bikes_list(data, self.week, i))
-        else:
-            tkinter.messagebox.showinfo(title="Attention", message="You didn't select a week and days")
+        pass
+    #     if self.week != 0 and self.selected_days != [0]*7:
+    #         load = mb.Load_db.Load_db()
+    #         data = load.set_df()
+    #         for i in range(len(self.selected_days)):
+    #             if self.selected_days[i] == 1:
+    #                 mb.vis.animation.Animation(load.bikes_list(data, self.week, i))
+    #     else:
+    #         tkinter.messagebox.showinfo(title="Attention", message="You didn't select a week and days")
 
     def callback_list(self, event):
         selection = self.listbox.curselection()
+        if selection[0] != 0:
+            self.lng.place(x=270, y=670)
+            self.label_text1.place(x=200, y=670)
+        else:
+            self.lng.place_forget()
+            self.label_text1.place_forget()
         self.img = ImageTk.PhotoImage(Image.open(
                                       self.img_rep+str(selection[0])+".png"))
         self.my_label.configure(image=self.img)
@@ -123,6 +130,6 @@ class Checkbar(tk.Frame):
 
 if __name__ == "__main__":
     app = Application()
-    app.root.title("Ma Première App :-)")
+    app.root.title("MONTPELLIER_BIKING")
     app.root.mainloop()
 
