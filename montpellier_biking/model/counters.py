@@ -41,7 +41,6 @@ class Counter():
         """
         return G.nodes[self.node]['y']
 
-    @staticmethod
     def x_list(counter_list):
         """
         Returns a list of x coordinates of a counter list
@@ -210,11 +209,13 @@ Laverune = Counter(coordinates=(43.5907, 3.81324),
                    node=ox.distance.get_nearest_node(G,
                    (43.5907, 3.81324)),
                    bikes=302, name="Laverune", out=True)
-Vielle_poste = Counter(coordinates=(43.6157418, 3.9096322),
+Vieille_poste = Counter(coordinates=(43.6157418, 3.9096322),
                        node=ox.distance.get_nearest_node(G,
                        (43.6157418, 3.9096322)),
                        bikes=283, name="Vielle_poste", out=True)
 
 counter_list = [Albert1er, Beracasa, Celleneuve, Delmas, Gerhardt, Lattes,
-                Laverune, Vielle_poste]
-                
+                Laverune, Vieille_poste]
+
+
+
