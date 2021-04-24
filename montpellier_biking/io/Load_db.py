@@ -115,11 +115,12 @@ class Load_db:
 
     def bikes_list(self, df, week, day):
         """Gives the list of number of bikes passed the day for every counter.
-        
-        :param df: dataframe with all counters, mean, weekday, and week (use set_df)
+
+        :param df: dataframe with all counters, mean, weekday,
+                 and week (use set_df)
         :param week: int between 1 and 12 the week's number of 2021
         :param day: int, day of the week (ex: 0 means monday)
-        
+
         :return: number of bikes passed the day for every counter
         :rtype: int list
         """

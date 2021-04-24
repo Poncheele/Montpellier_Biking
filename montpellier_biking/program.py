@@ -1,7 +1,7 @@
 """This program is a graphic interface to modelise bike traffic in Montpellier
     : First step select the week you want to modelise
     : Second step select days you want to modelise
-    : Then press make video ! It will create you a video by day. 
+    : Then press make video ! It will create you a video by day.
 """
 import os
 import tkinter as tk
@@ -11,6 +11,8 @@ import montpellier_biking as mb
 
 
 class Application():
+    """This class is a tkinter window
+    """
     selected_days = [0]*7
     week = 1
 
@@ -58,17 +60,23 @@ class Application():
         self.bouton_vid.place(x=1103, y=639)
 
     def callbakc_vid(self):
-        pass
-    #     if self.week != 0 and self.selected_days != [0]*7:
-    #         load = mb.Load_db.Load_db()
-    #         data = load.set_df()
-    #         for i in range(len(self.selected_days)):
-    #             if self.selected_days[i] == 1:
-    #                 mb.vis.animation.Animation(load.bikes_list(data, self.week, i))
-    #     else:
-    #         tkinter.messagebox.showinfo(title="Attention", message="You didn't select a week and days")
+        """Callback function for 'make video !" button
+        """
+        if self.week != 0 and self.selected_days != [0]*7:
+            load = mb.Load_db.Load_db()
+            data = load.set_df()
+            for i in range(len(self.selected_days)):
+                if self.selected_days[i] == 1:
+                    mb.vis.animation.Animation(load.bikes_list(data,
+                                               self.week, i))
+        else:
+            tkinter.messagebox.showinfo(title="Attention",
+                                        message="You didn't select"
+                                                "a week and days")
 
     def callback_list(self, event):
+        """callback funtion for week list_boxes
+        """
         selection = self.listbox.curselection()
         if selection[0] != 0:
             self.lng.place(x=270, y=670)
@@ -83,6 +91,8 @@ class Application():
 
 
 class Checkbar(tk.Frame):
+    """Class tk.Frame, set up checkboxes
+    """
     def __init__(self, parent=None, picks=[], side=tk.LEFT, anchor=tk.W):
         tk.Frame.__init__(self, parent)
         self.var1 = tk.IntVar()
@@ -98,18 +108,25 @@ class Checkbar(tk.Frame):
         self.chk2 = tk.Checkbutton(self, text='1: Tuesday', variable=self.var2,
                                    command=self.check_day_list2)
         self.chk2.pack(side=side, anchor=anchor, expand=tk.YES)
-        self.chk3 = tk.Checkbutton(self, text='2: Wednesday', variable=self.var3,
+        self.chk3 = tk.Checkbutton(self, text='2: Wednesday',
+                                   variable=self.var3,
                                    command=self.check_day_list3)
         self.chk3.pack(side=side, anchor=anchor, expand=tk.YES)
-        self.chk4 = tk.Checkbutton(self, text='3: Thursday', variable=self.var4,
+        self.chk4 = tk.Checkbutton(self, text='3: Thursday',
+                                   variable=self.var4,
                                    command=self.check_day_list4)
         self.chk4.pack(side=side, anchor=anchor, expand=tk.YES)
-        self.chk5 = tk.Checkbutton(self, text='4: Friday', variable=self.var5,
+        self.chk5 = tk.Checkbutton(self, text='4: Friday',
+                                   variable=self.var5,
                                    command=self.check_day_list5)
         self.chk5.pack(side=side, anchor=anchor, expand=tk.YES)
-        self.chk6 = tk.Checkbutton(self, text='5: Saturday', variable=self.var6, command=self.check_day_list6)
+        self.chk6 = tk.Checkbutton(self, text='5: Saturday',
+                                   variable=self.var6,
+                                   command=self.check_day_list6)
         self.chk6.pack(side=side, anchor=anchor, expand=tk.YES)
-        self.chk7 = tk.Checkbutton(self, text='6: Sunday', variable=self.var7, command=self.check_day_list7)
+        self.chk7 = tk.Checkbutton(self, text='6: Sunday',
+                                   variable=self.var7,
+                                   command=self.check_day_list7)
         self.chk7.pack(side=side, anchor=anchor, expand=tk.YES)
 
     def check_day_list1(self):
@@ -134,11 +151,7 @@ class Checkbar(tk.Frame):
         Application.selected_days[6] = self.var7.get()
 
 
-
 if __name__ == "__main__":
     app = Application()
     app.root.title("MONTPELLIER_BIKING")
     app.root.mainloop()
-
-
-

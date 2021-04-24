@@ -1,5 +1,3 @@
-"""T
-"""
 import matplotlib.pyplot as plt
 import matplotlib.animation as ma
 import osmnx as ox
@@ -13,8 +11,15 @@ G = mb.counters.G
 
 
 class Animation():
-
+    """This class generate a video of the bike traffic in montpellier in a day.
+    Need to use 'lauch_anim()' method.
+    """
     def __init__(self, bike_list=[1523, 1701, 694, 745, 1065, 455, 426, 292]):
+        """Parameters
+           ----------
+           bike_list: int list of numbers of bike passed at 
+           the counters in the day
+        """
         self.bikes = bike_list
         self.Albert1er = Counter(coordinates=(43.61620945549243,
                                               3.874408006668091),
@@ -59,14 +64,22 @@ class Animation():
         self.counter_list = self.counter_list
 
     def list_counter(self):
+        """Returns the counter list (montpellier_biking's Countr)
+        """
         return (self.counter_list)
 
     def set_anim(self):
+        """Set Self.anim_list
+        use Counter.list_for_ani from montpellier_biking.model.counters.Counter
+        """
         self.anim_list = Counter.list_for_ani(
                                   self.counter_list)
         self.anim_list = self.anim_list[1500:]
 
     def animate(self, i):
+        """Animation function,
+        plot scatter points of each bike presents at the frame i.
+        """
         self.pic.set_offsets(Counter.route_to_scatter(
                              self.anim_list[i]))
         self.hour.set_text(str(datetime.timedelta(seconds=i*30)))
@@ -79,6 +92,8 @@ class Animation():
         return self.pic, self.hour
 
     def launch_anim(self):
+        """Generate animation and save it as a mp4 file. Can be long
+        """
         self.set_anim()
         start_time = time.time()
         self.fig, self.ax = ox.plot_graph(G, node_size=0, show=False)
@@ -104,10 +119,9 @@ class Animation():
                          interval=100, blit=False, repeat=True)
         plt.show()
         print(time.time()-start_time)
-
-    # f = r"testtamere.avi"
-    # writervideo = animation.FFMpegWriter(fps=1)
-    # ani.save(f, writer=writervideo)
+        # f = r"testtamere.avi"
+        # writervideo = animation.FFMpegWriter(fps=1)
+        # ani.save(f, writer=writervideo)
 
 
 if __name__ == "__main__":
