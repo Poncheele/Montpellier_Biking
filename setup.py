@@ -12,4 +12,3 @@ setup(
   packages=['montpellier_biking','montpellier_biking.io', 'montpellier_biking.model', 'montpellier_biking.vis'],
   zip_safe=False
 )
-
