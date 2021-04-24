@@ -1,3 +1,5 @@
+"""T
+"""
 import matplotlib.pyplot as plt
 import matplotlib.animation as ma
 import osmnx as ox
@@ -11,7 +13,7 @@ G = mb.counters.G
 
 
 class Animation():
-   
+
     def __init__(self, bike_list=[1523, 1701, 694, 745, 1065, 455, 426, 292]):
         self.bikes = bike_list
         self.Albert1er = Counter(coordinates=(43.61620945549243,
