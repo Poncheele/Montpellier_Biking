@@ -1,10 +1,13 @@
-import time
-t = time.time()
+"""This program is a graphic interface to modelise bike traffic in Montpellier
+    : First step select the week you want to modelise
+    : Second step select days you want to modelise
+    : Then press make video ! It will create you a video by day. 
+"""
+import os
 import tkinter as tk
 import tkinter.messagebox
 from PIL import Image, ImageTk
 #import montpellier_biking as mb
-print(time.time()-t)
 
 
 class Application():
@@ -25,7 +28,7 @@ class Application():
         """
         Set the first graphic
         """
-        self.img_rep = "C:\\Users\\ponch\\python\\Montpellier_Biking\\montpellier_biking\\data\\images\\"
+        self.img_rep = os.path.dirname(__file__)+"/data/images/"
         self.img = ImageTk.PhotoImage(Image.open(self.img_rep+"0.png"))
 
     def init_widgets(self):
@@ -136,3 +139,6 @@ if __name__ == "__main__":
     app = Application()
     app.root.title("MONTPELLIER_BIKING")
     app.root.mainloop()
+
+
+
