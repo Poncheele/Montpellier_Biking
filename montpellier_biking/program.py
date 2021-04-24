@@ -7,7 +7,7 @@ import os
 import tkinter as tk
 import tkinter.messagebox
 from PIL import Image, ImageTk
-#import montpellier_biking as mb
+import montpellier_biking as mb
 
 
 class Application():

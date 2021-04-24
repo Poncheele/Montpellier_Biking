@@ -97,7 +97,7 @@ class Load_db:
         # Concat every counter's dataframe
         df_list = []
         for stri in self.count_str_list:
-            df_list.append(self.save_as_df(stri))
+            df_list.append(Load_db.save_as_df(stri))
         data_total = pd.DataFrame()
         for i in range(len(df_list)):
             if i == 3 or i == 6:
