@@ -1,13 +1,8 @@
 from montpellier_biking.model import G
 import numpy as np
 import networkx as nx
-
-#from numba import jit
-#import time
-
 from scipy import sparse
 import time
-
 
 
 class Counter():
@@ -59,8 +54,6 @@ class Counter():
     def y_node(self):
         """Gives a y coordinate on the graph.
 
-        text?
-        
         :return: the y coordinate on the graph.
         :rtype: float
 
@@ -83,7 +76,9 @@ class Counter():
         :Example:
 
         >>> import montpellier_biking as mb
-        >>> mb.counters.Counter.x_list([mb.counters.Celleneuve, mb.counters.Lattes, mb.counters.Vieille_poste])
+        >>> mb.counters.Counter.x_list([mb.counters.Celleneuve,
+                                        mb.counters.Lattes,
+                                        mb.counters.Vieille_poste])
         [3.8344038, 3.904615, 3.9095831]
 
         """
@@ -102,7 +97,9 @@ class Counter():
         :Example:
 
         >>> import montpellier_biking as mb
-        >>> mb.counters.Counter.y_list([mb.counters.Celleneuve, mb.counters.Lattes, mb.counters.Vieille_poste])
+        >>> mb.counters.Counter.y_list([mb.counters.Celleneuve,
+                                        mb.counters.Lattes,
+                                        mb.counters.Vieille_poste])
         [43.6146128, 43.5915408, 43.6155189]
 
         """
@@ -140,8 +137,8 @@ class Counter():
                 path = True
             except Exception:
                 start = np.random.choice(G.nodes)
-        if len(route) > 120:
-            route = route[len(route)-110:]
+        # if len(route) > 120:
+        #     route = route[len(route)-110:]
         lengh = len(route)
         if self.out is False:
             path = False
@@ -165,7 +162,8 @@ class Counter():
         :Example:
 
         >>> import montpellier_biking as mb
-        >>> mb.counters.Counter.route_to_scatter([280711163, 280935801, 280935470, 287874356])
+        >>> mb.counters.Counter.route_to_scatter([280711163, 280935801,
+                                                  280935470, 287874356])
         [[3.8121647, 43.6352595],
          [3.8106809, 43.635287],
          [3.8093811, 43.6359382],
@@ -179,11 +177,15 @@ class Counter():
                 scatter_list.append(scatter)
             return scatter_list
 
+<<<<<<< HEAD
     
 #def set_matrix(self):
 
 
     def set_matrix(self, quality = 2880):
+=======
+    def set_matrix(self, quality=2880):
+>>>>>>> master
         """set passing bike matrix for one day
 
         :return: each raw is a frame, each colum is a route.
@@ -213,12 +215,10 @@ class Counter():
                     M1[random_pass-(lengh):random_pass+len(route)-lengh,
                        i+j*120] = route
                 except Exception:  # last hour can't exceed 2880
-                    
                     random_pass = np.random.randint(low=min(len(route)+120*j,
                                                     120*(j+1)-1),
                                                     high=120*(j+1))
                     M1[random_pass-len(route):random_pass, i+j*120] = route
-                   
                 i += 1
         return sparse.csr_matrix(M1)
 
@@ -226,8 +226,10 @@ class Counter():
         """Set the simulation for each counter
 
         :param: list of counter
-        :return anim_list: list of node list, all nodes who need to be plotted at time i
-        :return count_list: list of list that contain the number of bike, passed at the time i
+        :return anim_list: list of node list,
+        all nodes who need to be plotted at time i
+        :return count_list: list of list that contain the number of bike,
+        passed at the time i
         :rtype: list
 
         :Example:
@@ -255,4 +257,3 @@ class Counter():
                 anim_list[i] = np.hstack((anim_list[i], M[i].data))
             print(time.time()-t)
         return anim_list
-

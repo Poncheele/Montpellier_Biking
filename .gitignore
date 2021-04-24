@@ -17,7 +17,6 @@ __pycache__
 *.dvi
 *.jpg
 *.jpeg
-*.png
 *.svg
 *.eps
 *.pdf_tex

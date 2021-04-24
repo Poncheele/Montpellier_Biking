@@ -18,3 +18,5 @@ def test_counter_matrix():
         assert(nbrebike <= c.bikes*1.05 and nbrebike >= c.bikes*0.95)
 
 #%%
+test_counter_matrix()
+
