@@ -6,8 +6,8 @@ import datetime
 
 
 class Load_db:
-    """
-    Download jsons files and fix them to be opened as DFs
+    """Download jsons files and fix them to be opened as DFs
+
     """
     count_str_list = ["Albert 1er",
                       "Beracasa",
@@ -21,8 +21,10 @@ class Load_db:
                       "Vieille-Poste"]
 
     def __init__(self, urls=url_db, name=C_names):
-        """
-        Download jsons files and fix them to be opened as DFs
+        """Download jsons files and fix them to be opened as DFs
+
+        :param urls: 
+        :param name: list of counters's name
         """
         i = 0
         for url in urls:
@@ -46,16 +48,13 @@ class Load_db:
             os.remove(path_target_txt)
             i += 1
 
-    @staticmethod
     def save_as_df(name):
-        """
-        Open json as a dataframe
-        Parameters
-        ----------
-        String: name of the counter
-        Returns
-        -------
-        DataFrame
+        """Open json as a dataframe
+        
+        :param name: name of the counter
+        :type name: string
+        :return: dataframe
+        
         """
         path_target2 = os.path.join(os.path.dirname(
                                     os.path.realpath(__file__)),
@@ -69,8 +68,7 @@ class Load_db:
         return df
 
     def set_df(self):
-        """
-        Returns a dataframe with all counters, mean, weekday, and week
+        """Give a dataframe with all counters, mean, weekday, and week
         """
         # Concat every counter's dataframe
         df_list = []
