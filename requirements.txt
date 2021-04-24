@@ -1,0 +1,14 @@
+wget==3.2
+matplotlib==3.3.4
+networkx==2.5
+numpy==1.20.1
+geopandas==0.9.0
+pandas==1.2.3
+scipy==1.6.1
+Shapely==1.7.1
+osmnx==1.0.1
+pytest==6.2.3
+ffmpeg==1.4
+ipython==7.22.0
+Pillow==8.2.0
+plotly_express==0.4.1
