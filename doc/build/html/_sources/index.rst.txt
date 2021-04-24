@@ -3,8 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Network_Module's documentation!
-==========================================
+Welcome to montpellier_biking's documentation!
+===============================================
+The main objective of this package is to be able to easily use data thanks to functions to view the flow of cycling in the city of Montpellier.
 
 .. toctree::
    :maxdepth: 2
@@ -12,7 +13,17 @@ Welcome to Network_Module's documentation!
 
    installation/install
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Counter
 
+   biking/counter
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Data
+
+   biking/data
 
 Indices and tables
 ==================
