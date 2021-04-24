@@ -1,4 +1,3 @@
-from montpellier_biking.io import url_db, C_names
 import os
 import wget
 import pandas as pd
@@ -9,6 +8,30 @@ class Load_db:
     """
     Download jsons files and fix them to be opened as DFs
     """
+    url_db = ['https://data.montpellier3m.fr/sites/default/files/ressources/'
+              'MMM_EcoCompt_X2H19070220_archive.json',
+              'https://data.montpellier3m.fr/sites/default/files/ressources/'
+              'MMM_EcoCompt_X2H20042632_archive.json',
+              'https://data.montpellier3m.fr/sites/default/files/ressources/'
+              'MMM_EcoCompt_X2H20042633_archive.json',
+              'https://data.montpellier3m.fr/sites/default/files/ressources/'
+              'MMM_EcoCompt_X2H20042634_archive.json',
+              'https://data.montpellier3m.fr/sites/default/files/ressources/'
+              'MMM_EcoCompt_X2H20042635_archive.json',
+              'https://data.montpellier3m.fr/sites/default/files/ressources/'
+              'MMM_EcoCompt_X2H20063161_archive.json',
+              'https://data.montpellier3m.fr/sites/default/files/ressources/'
+              'MMM_EcoCompt_X2H20063162_archive.json',
+              'https://data.montpellier3m.fr/sites/default/files/ressources/'
+              'MMM_EcoCompt_XTH19101158_archive.json',
+              'https://data.montpellier3m.fr/sites/default/files/ressources/'
+              'MMM_EcoCompt_X2H20063163_archive.json',
+              'https://data.montpellier3m.fr/sites/default/files/ressources/'
+              'MMM_EcoCompt_X2H20063164_archive.json']
+
+    C_names = ['Beracasa', 'Laverune', 'Celleneuve', 'Lattes 2', 'Lattes 1',
+               'Vieille-Poste', 'Gerhardt', 'Albert 1er', 'Delmas 1', 'Delmas 2']
+
     count_str_list = ["Albert 1er",
                       "Beracasa",
                       "Celleneuve",
@@ -49,7 +72,7 @@ class Load_db:
     @staticmethod
     def save_as_df(name):
         """
-        Open json as a dataframe
+        Open json as a dataframe, date starts the 2021-01-04
         Parameters
         ----------
         String: name of the counter
@@ -91,6 +114,17 @@ class Load_db:
         data_total['week'] = data_total.index.week
         return data_total
 
-    # @staticmethod
-    # def df_hist_plot_total(df):
-        
+    def bikes_list(self, df, week, day):
+        """
+        Gives the list of number of bikes passed the day for every counter.
+        Parameters:
+        -----------
+        df: dataframe with all counters, mean, weekday, and week (use set_df)
+        week: int between 1 and 12 the week's number of 2021
+        day: int, day of the week (ex: 0 means monday)
+        Returns:
+        --------
+        int list: number of bikes passed the day for every counter
+        """
+        temp = df[df['weekday'] == day]
+        return list(temp[temp['week'] == week].iloc[0, 0:8])

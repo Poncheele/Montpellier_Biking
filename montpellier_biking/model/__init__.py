@@ -1,2 +1,5 @@
 import osmnx as ox
-G = ox.graph_from_place('Montpellier, France', 'bike')
+import time
+t=time.time()
+G = ox.graph_from_place('Montpellier, France', 'bike', simplify=False)
+print('time to load graph: ', time.time()-t)

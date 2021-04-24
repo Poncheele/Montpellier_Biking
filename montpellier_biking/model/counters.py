@@ -1,5 +1,4 @@
 from montpellier_biking.model import G
-import osmnx as ox
 import numpy as np
 import networkx as nx
 
@@ -7,6 +6,7 @@ import networkx as nx
 #import time
 
 from scipy import sparse
+import time
 
 
 
@@ -129,10 +129,15 @@ class Counter():
                 scatter = [G.nodes[route[j]]['x'], G.nodes[route[j]]['y']]
                 scatter_list.append(scatter)
             return scatter_list
+<<<<<<< HEAD
     
     def set_matrix(self):
+=======
+
+    def set_matrix(self, quality = 2880):
+>>>>>>> c93d16e5faae7c9f9695323b6af6e622ae68854d
         """
-        set passing bike matrix for one day
+        Set passing bike matrix for one day
         Parameters
         ----------
         Counter
@@ -140,7 +145,7 @@ class Counter():
         -------
         numpy matrix: each raw is a frame, each colum is a route.
         """
-        M1 = np.zeros((2880, 2880))
+        M1 = np.zeros((quality, quality))
         for j in range(24):
             i = 0
             while i <= Counter.bike_distribution[j]*self.bikes/100:
@@ -151,9 +156,13 @@ class Counter():
                     M1[random_pass-(lengh):random_pass+len(route)-lengh,
                        i+j*120] = route
                 except Exception:  # last hour can't exceed 2880
-                    random_pass = np.random.randint(low=min(len(route)+120*23,
-                                                    120*24-1), high=120*24)
-                    M1[random_pass-len(route):random_pass, i+j*120] = route
+                    try:
+                        random_pass = np.random.randint(low=min(len(route)+120*j,
+                                                        120*(j+1)-1),
+                                                        high=120*(j+1))
+                        M1[random_pass-len(route):random_pass, i+j*120] = route
+                    except Exception:
+                        pass
                 i += 1
         return sparse.csr_matrix(M1)
 
@@ -177,10 +186,13 @@ class Counter():
             anim_list.append(M[i].data)
         # extends lists with other counters
         for c in c_list[1:]:
+            t = time.time()
             M = Counter.set_matrix(c)
             for i in range(M.shape[0]):
                 anim_list[i] = np.hstack((anim_list[i], M[i].data))
+            print(time.time()-t)
         return anim_list
+<<<<<<< HEAD
 
 
 
@@ -228,3 +240,5 @@ counter_list = [Albert1er, Beracasa, Celleneuve, Delmas, Gerhardt, Lattes,
 #Counter.set_matrix(Albert1er)
 #print(time.time() - start_time)
 
+=======
+>>>>>>> c93d16e5faae7c9f9695323b6af6e622ae68854d
