@@ -78,7 +78,7 @@ class Load_db:
         :param name: name of the counter
         :type name: string
         :return: dataframe
-        
+
         """
         path_target2 = os.path.join(os.path.dirname(
                                     os.path.realpath(__file__)),
