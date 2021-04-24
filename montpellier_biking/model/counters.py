@@ -178,23 +178,12 @@ class Counter():
                 scatter = [G.nodes[route[j]]['x'], G.nodes[route[j]]['y']]
                 scatter_list.append(scatter)
             return scatter_list
-<<<<<<< HEAD
+
     
-    def set_matrix(self):
-<<<<<<< HEAD
-=======
+#def set_matrix(self):
+
 
     def set_matrix(self, quality = 2880):
->>>>>>> c93d16e5faae7c9f9695323b6af6e622ae68854d
-        """
-        Set passing bike matrix for one day
-        Parameters
-        ----------
-        Counter
-        Returns
-        -------
-        numpy matrix: each raw is a frame, each colum is a route.
-=======
         """set passing bike matrix for one day
 
         :return: each raw is a frame, each colum is a route.
@@ -212,7 +201,6 @@ class Counter():
         (2878, 2280)  3667338829.0
         (2878, 2291)  3667338829.0
 
->>>>>>> branch_julie
         """
         M1 = np.zeros((quality, quality))
         for j in range(24):
@@ -225,13 +213,12 @@ class Counter():
                     M1[random_pass-(lengh):random_pass+len(route)-lengh,
                        i+j*120] = route
                 except Exception:  # last hour can't exceed 2880
-                    try:
-                        random_pass = np.random.randint(low=min(len(route)+120*j,
-                                                        120*(j+1)-1),
-                                                        high=120*(j+1))
-                        M1[random_pass-len(route):random_pass, i+j*120] = route
-                    except Exception:
-                        pass
+                    
+                    random_pass = np.random.randint(low=min(len(route)+120*j,
+                                                    120*(j+1)-1),
+                                                    high=120*(j+1))
+                    M1[random_pass-len(route):random_pass, i+j*120] = route
+                   
                 i += 1
         return sparse.csr_matrix(M1)
 
@@ -268,53 +255,4 @@ class Counter():
                 anim_list[i] = np.hstack((anim_list[i], M[i].data))
             print(time.time()-t)
         return anim_list
-<<<<<<< HEAD
 
-
-
-# Number of bike the 04-15
-Albert1er = Counter(coordinates=(43.61620945549243,
-                    3.874408006668091),
-                    node=ox.distance.get_nearest_node(G,
-                    (43.61620945549243, 3.874408006668091)),
-                    bikes=1569, name="Albert1er")
-
-Beracasa = Counter(coordinates=(43.60969924926758, 3.896939992904663),
-                   node=ox.distance.get_nearest_node(G,
-                   (43.60969924926758, 3.896939992904663)),
-                   bikes=1376, name="Beracasa")
-Celleneuve = Counter(coordinates=(43.61465, 3.8336),
-                     node=ox.distance.get_nearest_node(G,
-                     (43.61465, 3.8336)), bikes=638,
-                     name="Celleneuve")
-Delmas = Counter(coordinates=(43.6266977, 3.8956288),
-                 node=ox.distance.get_nearest_node(G,
-                 (43.6266977, 3.8956288)),
-                 bikes=725, name="Delmas", out=True)
-Gerhardt = Counter(coordinates=(43.6138841, 3.8684671),
-                   node=ox.distance.get_nearest_node(G,
-                   (43.6138841, 3.8684671)),
-                   bikes=1109, name="Gerhardt")
-Lattes = Counter(coordinates=(43.5915, 3.90473),
-                 node=ox.distance.get_nearest_node(G,
-                 (43.5915, 3.90473)),
-                 bikes=648, name="Lattes", out=True)
-Laverune = Counter(coordinates=(43.5907, 3.81324),
-                   node=ox.distance.get_nearest_node(G,
-                   (43.5907, 3.81324)),
-                   bikes=302, name="Laverune", out=True)
-Vieille_poste = Counter(coordinates=(43.6157418, 3.9096322),
-                       node=ox.distance.get_nearest_node(G,
-                       (43.6157418, 3.9096322)),
-                       bikes=283, name="Vielle_poste", out=True)
-
-counter_list = [Albert1er, Beracasa, Celleneuve, Delmas, Gerhardt, Lattes,
-                Laverune, Vieille_poste]
-
-
-#start_time = time.time()
-#Counter.set_matrix(Albert1er)
-#print(time.time() - start_time)
-
-=======
->>>>>>> c93d16e5faae7c9f9695323b6af6e622ae68854d

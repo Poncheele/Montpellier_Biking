@@ -9,7 +9,7 @@ import datetime
 G = mb.counters.G
 
 class Animation():
-
+   
     def __init__(self, bike_list=[1523, 1701, 694, 745, 1065, 455, 426, 292]):
         self.bikes = bike_list
         self.Albert1er = mb.counters.Counter(coordinates=(43.61620945549243,
@@ -46,18 +46,22 @@ class Animation():
                                 node=ox.distance.get_nearest_node(G,
                                 (43.6157418, 3.9096322)),
                                 bikes=self.bikes[7], name="Vielle_poste", out=True)
-
-        self.Counter_list = [self.Albert1er, self.Beracasa, self.Celleneuve,
+        self.counter_list = [self.Albert1er, self.Beracasa, self.Celleneuve,
                              self.Delmas, self.Gerhardt, self.Lattes,
                              self.Laverune, self.Vieille_poste]
-        t = time.time()
-        self.set_anim()
-        print('time to set anim', time.time()-t)
-        self.launch_anim()
+        
+
+
+    def list_counter(self):
+        return(self.counter_list)
+
+
+        
+
 
     def set_anim(self):
         self.anim_list = mb.counters.Counter.list_for_ani(
-                                  self.Counter_list)
+                                  self.counter_list)
         self.anim_list = self.anim_list[1500:]
 
     def animate(self,i):
@@ -65,12 +69,13 @@ class Animation():
         self.hour.set_text(str(datetime.timedelta(seconds=i*30)))
         for j in range(len(self.text_list)):
             self.count_list[j] += np.count_nonzero(self.anim_list[i]
-                                              == self.Counter_list[j].node)
+                                              == self.counter_list[j].node)
             self.text_list[j].set_text(self.count_str_list[j]+str(self.count_list[j]))
         return self.pic, self.hour
 
     
     def launch_anim(self):
+        self.set_anim()
         start_time = time.time()
         self.fig, self.ax = ox.plot_graph(G, node_size=0, show=False)
         # fig.set_size_inches(15, 15)

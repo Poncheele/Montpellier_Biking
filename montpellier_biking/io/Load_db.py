@@ -72,23 +72,12 @@ class Load_db:
             i += 1
 
     def save_as_df(name):
-<<<<<<< HEAD
-        """
-        Open json as a dataframe, date starts the 2021-01-04
-        Parameters
-        ----------
-        String: name of the counter
-        Returns
-        -------
-        DataFrame
-=======
         """Open json as a dataframe
         
         :param name: name of the counter
         :type name: string
         :return: dataframe
         
->>>>>>> branch_julie
         """
         path_target2 = os.path.join(os.path.dirname(
                                     os.path.realpath(__file__)),
@@ -124,16 +113,14 @@ class Load_db:
         return data_total
 
     def bikes_list(self, df, week, day):
-        """
-        Gives the list of number of bikes passed the day for every counter.
-        Parameters:
-        -----------
-        df: dataframe with all counters, mean, weekday, and week (use set_df)
-        week: int between 1 and 12 the week's number of 2021
-        day: int, day of the week (ex: 0 means monday)
-        Returns:
-        --------
-        int list: number of bikes passed the day for every counter
+        """Gives the list of number of bikes passed the day for every counter.
+        
+        :param df: dataframe with all counters, mean, weekday, and week (use set_df)
+        :param week: int between 1 and 12 the week's number of 2021
+        :param day: int, day of the week (ex: 0 means monday)
+        
+        :return: number of bikes passed the day for every counter
+        :rtype: int list
         """
         temp = df[df['weekday'] == day]
         return list(temp[temp['week'] == week].iloc[0, 0:8])
