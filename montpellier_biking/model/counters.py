@@ -54,8 +54,6 @@ class Counter():
     def y_node(self):
         """Gives a y coordinate on the graph.
 
-        text?
-        
         :return: the y coordinate on the graph.
         :rtype: float
 
@@ -220,9 +218,9 @@ class Counter():
         """Set the simulation for each counter
 
         :param: list of counter
-        :return anim_list: list of node list, 
+        :return anim_list: list of node list,
         all nodes who need to be plotted at time i
-        :return count_list: list of list that contain the number of bike, 
+        :return count_list: list of list that contain the number of bike,
         passed at the time i
         :rtype: list
 

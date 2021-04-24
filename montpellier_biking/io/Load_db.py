@@ -30,7 +30,8 @@ class Load_db:
               'MMM_EcoCompt_X2H20063164_archive.json']
 
     C_names = ['Beracasa', 'Laverune', 'Celleneuve', 'Lattes 2', 'Lattes 1',
-               'Vieille-Poste', 'Gerhardt', 'Albert 1er', 'Delmas 1', 'Delmas 2']
+               'Vieille-Poste', 'Gerhardt', 'Albert 1er', 'Delmas 1',
+               'Delmas 2']
 
     count_str_list = ["Albert 1er",
                       "Beracasa",
@@ -46,7 +47,7 @@ class Load_db:
     def __init__(self, urls=url_db, name=C_names):
         """Download jsons files and fix them to be opened as DFs
 
-        :param urls: 
+        :param urls: url list of datasets
         :param name: list of counters's name
         """
         i = 0
@@ -72,23 +73,12 @@ class Load_db:
             i += 1
 
     def save_as_df(name):
-<<<<<<< HEAD
-        """
-        Open json as a dataframe, date starts the 2021-01-04
-        Parameters
-        ----------
-        String: name of the counter
-        Returns
-        -------
-        DataFrame
-=======
         """Open json as a dataframe
-        
+
         :param name: name of the counter
         :type name: string
         :return: dataframe
-        
->>>>>>> branch_julie
+
         """
         path_target2 = os.path.join(os.path.dirname(
                                     os.path.realpath(__file__)),
