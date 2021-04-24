@@ -29,6 +29,9 @@ class Application():
         self.img = ImageTk.PhotoImage(Image.open(self.img_rep+"0.png"))
 
     def init_widgets(self):
+        """
+        Init widgets
+        """
         # init listbox
         self.listbox = tk.Listbox(activestyle='dotbox', height=13)
         self.listbox.insert(1, "01/04-04/28")
@@ -105,7 +108,7 @@ class Checkbar(tk.Frame):
         self.chk6.pack(side=side, anchor=anchor, expand=tk.YES)
         self.chk7 = tk.Checkbutton(self, text='6: Sunday', variable=self.var7, command=self.check_day_list7)
         self.chk7.pack(side=side, anchor=anchor, expand=tk.YES)
-    
+
     def check_day_list1(self):
         Application.selected_days[0] = self.var1.get()
 
@@ -133,4 +136,3 @@ if __name__ == "__main__":
     app = Application()
     app.root.title("MONTPELLIER_BIKING")
     app.root.mainloop()
-

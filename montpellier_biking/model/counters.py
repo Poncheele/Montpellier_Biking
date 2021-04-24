@@ -93,8 +93,8 @@ class Counter():
                 path = True
             except Exception:
                 start = np.random.choice(G.nodes)
-        if len(route) > 120:
-            route = route[len(route)-110:]
+        # if len(route) > 120:
+        #     route = route[len(route)-110:]
         lengh = len(route)
         if self.out is False:
             path = False
@@ -125,7 +125,7 @@ class Counter():
                 scatter_list.append(scatter)
             return scatter_list
 
-    def set_matrix(self, quality = 2880):
+    def set_matrix(self, quality=2880):
         """
         Set passing bike matrix for one day
         Parameters
@@ -146,13 +146,10 @@ class Counter():
                     M1[random_pass-(lengh):random_pass+len(route)-lengh,
                        i+j*120] = route
                 except Exception:  # last hour can't exceed 2880
-                    try:
-                        random_pass = np.random.randint(low=min(len(route)+120*j,
-                                                        120*(j+1)-1),
-                                                        high=120*(j+1))
-                        M1[random_pass-len(route):random_pass, i+j*120] = route
-                    except Exception:
-                        pass
+                    random_pass = np.random.randint(low=min(len(route)+120*j,
+                                                    120*(j+1)-1),
+                                                    high=120*(j+1))
+                    M1[random_pass-len(route):random_pass, i+j*120] = route
                 i += 1
         return sparse.csr_matrix(M1)
 
@@ -182,3 +179,21 @@ class Counter():
                 anim_list[i] = np.hstack((anim_list[i], M[i].data))
             print(time.time()-t)
         return anim_list
+
+
+
+
+import osmnx as ox
+Albert1er = Counter(coordinates=(43.61620945549243,
+                    3.874408006668091),
+                    node=ox.distance.get_nearest_node(G,
+                    (43.61620945549243, 3.874408006668091)),
+                    bikes=500, name="Albert1er")
+
+Counter.generate_random_route(Albert1er)
+
+t= time.time()
+Counter.set_matrix(Albert1er)
+print(time.time()-t)
+
+help(nx.general_random_intersection_graph)
