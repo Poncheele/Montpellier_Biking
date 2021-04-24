@@ -25,7 +25,6 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
-      working-directory: ./app
       run: |
         pip install -r requirements.txt
     - name: Test with pytest
