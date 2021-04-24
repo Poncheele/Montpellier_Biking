@@ -177,15 +177,7 @@ class Counter():
                 scatter_list.append(scatter)
             return scatter_list
 
-<<<<<<< HEAD
-    
-#def set_matrix(self):
-
-
-    def set_matrix(self, quality = 2880):
-=======
     def set_matrix(self, quality=2880):
->>>>>>> master
         """set passing bike matrix for one day
 
         :return: each raw is a frame, each colum is a route.
