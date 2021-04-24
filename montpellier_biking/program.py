@@ -38,7 +38,7 @@ class Application():
         # init listbox
         self.listbox = tk.Listbox(activestyle='dotbox', height=13)
         self.listbox.insert(1, "01/04-04/28")
-        for i in range(1, 13): 
+        for i in range(1, 13):
             self.listbox.insert(i, "week "+str(i))
         self.listbox.bind("<<ListboxSelect>>", self.callback_list)
         self.lng = Checkbar(self.root, ['0: Monday', '1: Tuesday',
@@ -58,15 +58,15 @@ class Application():
         self.bouton_vid.place(x=1103, y=639)
 
     def callbakc_vid(self):
-        pass
-    #     if self.week != 0 and self.selected_days != [0]*7:
-    #         load = mb.Load_db.Load_db()
-    #         data = load.set_df()
-    #         for i in range(len(self.selected_days)):
-    #             if self.selected_days[i] == 1:
-    #                 mb.vis.animation.Animation(load.bikes_list(data, self.week, i))
-    #     else:
-    #         tkinter.messagebox.showinfo(title="Attention", message="You didn't select a week and days")
+        if self.week != 0 and self.selected_days != [0]*7:
+            load = mb.Load_db.Load_db()
+            data = load.set_df()
+            for i in range(len(self.selected_days)):
+                if self.selected_days[i] == 1:
+                    anim = mb.vis.animation.Animation(load.bikes_list(data, self.week, i))
+                    anim.launch_anim()
+        else:
+            tkinter.messagebox.showinfo(title="Attention", message="You didn't select a week and days")
 
     def callback_list(self, event):
         selection = self.listbox.curselection()

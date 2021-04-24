@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import matplotlib.animation as ma
 import osmnx as ox
 import montpellier_biking as mb
@@ -6,6 +6,7 @@ from montpellier_biking.model.counters import Counter
 import numpy as np
 import time
 import datetime
+from matplotlib import animation
 
 G = mb.counters.G
 
@@ -98,15 +99,13 @@ class Animation():
         for i in range(len(self.count_list)):
             self.text_list.append(self.ax.text(3.903, 43.57+0.0025*i,
                                   self.count_str_list[i]+str(0), c='w'))
-        ma.FuncAnimation(self.fig, self.animate, frames=100,
-                         interval=100, blit=False, repeat=True)
-        plt.show()
+        ani = ma.FuncAnimation(self.fig, self.animate, frames=100,
+                               interval=100, blit=False, repeat=True)
+        #plt.show()
+        f = r"testtamere.avi"
+        writervideo = animation.FFMpegWriter(fps=1)
+        ani.save(f, writer=writervideo)
         print(time.time()-start_time)
-
-    # f = r"testtamere.avi"
-    # writervideo = animation.FFMpegWriter(fps=1)
-    # ani.save(f, writer=writervideo)
-
 
 if __name__ == "__main__":
     app = Animation()
