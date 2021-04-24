@@ -6,6 +6,7 @@ from PIL import Image, ImageTk
 #import montpellier_biking as mb
 print(time.time()-t)
 
+
 class Application():
     selected_days = [0]*7
     week = 1
