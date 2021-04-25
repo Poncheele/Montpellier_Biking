@@ -1,4 +1,6 @@
 
+![example workflow](https://github.com/Poncheele/Montpellier_Biking/actions/workflows/pythonpackage.yml/badge.svg)
+
 # Group project "Montpellier biking network simulation"
 ![montpellier_biking](images_video/image_readme.png)
 ## Group members :
