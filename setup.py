@@ -15,5 +15,6 @@ setup(
   packages=['montpellier_biking', 'montpellier_biking.io',
             'montpellier_biking.model',
             'montpellier_biking.vis'],
-  zip_safe=False
+  zip_safe=False,
+  include_package_data=True
 )

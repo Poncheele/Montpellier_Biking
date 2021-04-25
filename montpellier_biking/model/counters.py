@@ -207,10 +207,13 @@ class Counter():
                     M1[random_pass-(lengh):random_pass+len(route)-lengh,
                        i+j*120] = route
                 except Exception:  # last hour can't exceed 2880
-                    random_pass = np.random.randint(low=min(len(route)+120*j,
-                                                    120*(j+1)-1),
-                                                    high=120*(j+1))
-                    M1[random_pass-len(route):random_pass, i+j*120] = route
+                    try:
+                        random_pass = np.random.randint(low=min(len(route)+120*j,
+                                                        120*(j+1)-1),
+                                                        high=120*(j+1))
+                        M1[random_pass-len(route):random_pass, i+j*120] = route
+                    except Exception:
+                        pass
                 i += 1
         return sparse.csr_matrix(M1)
 
