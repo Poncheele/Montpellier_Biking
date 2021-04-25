@@ -5,7 +5,7 @@
 
 Welcome to montpellier_biking's documentation!
 ===============================================
-The main objective of this package is to be able to easily use data thanks to functions to view the flow of cycling in the city of Montpellier.
+The main objective of this package is to be able to easily use data using functions ,in order to circulation flow in the city of Montpellier.
 
 .. toctree::
    :maxdepth: 2
