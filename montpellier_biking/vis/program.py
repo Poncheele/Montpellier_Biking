@@ -20,7 +20,7 @@ class Application():
     def __init__(self):
         self.root = tk.Tk()
         self.load = mb.Load_db.Load_db()
-        self.load.load_images(os.path.dirname(__file__)+"/data/images/")
+        self.load.load_images(os.path.dirname(__file__)+"/../data/images/")
         self.root.geometry('1230x700')
         self.week = Application.week
         self.init_image()
@@ -31,7 +31,7 @@ class Application():
         """
         Set the first graphic
         """
-        self.img_rep = os.path.dirname(__file__)+"/data/images/"
+        self.img_rep = os.path.dirname(__file__)+"/../data/images/"
         self.img = ImageTk.PhotoImage(Image.open(self.img_rep+"0.png"))
 
     def init_widgets(self):
@@ -64,7 +64,6 @@ class Application():
         """Callback function for 'make video !" button
         """
         if self.week != 0 and self.selected_days != [0]*7:
-
             data = self.load.set_df()
             for i in range(len(self.selected_days)):
                 if self.selected_days[i] == 1:

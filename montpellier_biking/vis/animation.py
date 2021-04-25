@@ -74,10 +74,8 @@ class Animation():
         """Set Self.anim_list
         use Counter.list_for_ani from montpellier_biking.model.counters.Counter
         """
-        print('je set lanim')
         self.anim_list = Counter.list_for_ani(
                                   self.counter_list)
-        print('anim set')
 
     def animate(self, i):
         """Animation function,
@@ -114,13 +112,14 @@ class Animation():
                                "Laverune:     ",
                                "Vieille_poste: "]
         self.text_list = []
-        self.hour = self.ax.text(3.8075, 43.57, str(self.date)+" 00:00:00", c='w')
+        self.hour = self.ax.text(3.8075, 43.57,
+                                 str(self.date)+" 00:00:00", c='w')
         for i in range(len(self.count_list)):
             self.text_list.append(self.ax.text(3.903, 43.57+0.0025*i,
                                   self.count_str_list[i]+str(0), c='w'))
         ani = ma.FuncAnimation(self.fig, self.animate, frames=2880,
                                interval=100, blit=False, repeat=False)
-        #plt.show()
+        # plt.show()
         f = r""+str(self.date)+".avi"
         writervideo = ma.FFMpegWriter(fps=10)
         ani.save(f, writer=writervideo)
@@ -129,7 +128,4 @@ class Animation():
 
 if __name__ == "__main__":
     app = Animation()
-
-
-objet = Animation()
 

@@ -11,6 +11,13 @@
 
 The end goal of this project is to create a Python module (that can be imported with pip) that is able to produce videos of the flow in the city of Montpellier during a whole week .
 
+## Installation :
+
+    $ pip install montpellier-biking
+
+## How to use it:
+    >>> import montpellier_biking as mb
+    >>> mb.program
 
 ## Other
 ### Tasks distribution (mid time) :
@@ -23,5 +30,7 @@ The end goal of this project is to create a Python module (that can be imported 
 * The traffic's visualization  -> Clement ,Julie et Wiam
 * pep8/Documentation -> Everybody 
 * Tests -> Gade et Wiam
+
+
 
 
