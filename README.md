@@ -1,4 +1,6 @@
+
 # Group project "Montpellier biking network simulation"
+![montpellier_biking](image_readme.png)
 ## Group members :
  * Alleau Julie : julie.alleau@etu.umontpellier.fr 
  * Chaoui Wiam : wiam.chaoui@etu.umontpellier.fr
@@ -9,7 +11,11 @@
 
 The end goal of this project is to create a Python module (that can be imported with pip) that is able to produce videos of the flow in the city of Montpellier during a whole week .
 
-## Tasks distribution  :
+
+
+
+## Other
+### Tasks distribution (mid time) :
 
 * Data processing -> Clement et Julie 
 * Creation of a module that will allow traffic modeling : -> Clement ,Julie et Gade 

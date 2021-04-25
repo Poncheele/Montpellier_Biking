@@ -11,6 +11,10 @@ The main objective of this package is to be able to easily use data thanks to fu
    :maxdepth: 2
    :caption: Contents:
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Installation:
+
    installation/install
 
 .. toctree::
@@ -24,6 +28,14 @@ The main objective of this package is to be able to easily use data thanks to fu
    :caption: Data
 
    biking/data
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Graphic interface
+
+   biking/graphic_interface
+
+   
 
 Indices and tables
 ==================

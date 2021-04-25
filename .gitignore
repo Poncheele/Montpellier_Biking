@@ -40,4 +40,5 @@ __pycache__
 # Xournalpp
 *.xopp
 *.json
+*.egg-info
 
