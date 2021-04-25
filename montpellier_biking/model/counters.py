@@ -238,6 +238,7 @@ class Counter():
               ]
         array([...])
         ...
+
         """
         anim_list = []
         # set list for the first counter
