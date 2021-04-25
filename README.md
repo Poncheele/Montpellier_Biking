@@ -42,6 +42,8 @@ Way 2:
 * pep8/Documentation -> Everybody 
 * Tests -> Gade et Wiam
 
+## Video presentation
 
+You can find it in the images_video folder.
 
 
