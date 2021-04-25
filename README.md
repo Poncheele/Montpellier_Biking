@@ -12,8 +12,6 @@
 The end goal of this project is to create a Python module (that can be imported with pip) that is able to produce videos of the flow in the city of Montpellier during a whole week .
 
 
-
-
 ## Other
 ### Tasks distribution (mid time) :
 
