@@ -1,9 +1,8 @@
 How to install
 ==============
 
-On windows
-----------
+We can install montpellier_biking's package with the command
 
+::
 
-On Linux
----------
+        $ pip install montpellier_biking

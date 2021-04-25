@@ -20,8 +20,8 @@ Throughout the project, we need counters which are defined as follows:
                           bikes=1569, name="Albert1er")
 
 
-We have the coordinates, nodes, number of bicycles passed at this counter,
-the name of counter, and to finish with is the counter is in Montpellier or not.
+We have the coordinates, nodes, number of bicycles passed by this counter,
+the name of  the counter, as well as if the counter is in Montpellier or not.
 
 The list of all counters are:
 
