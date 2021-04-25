@@ -1,6 +1,6 @@
 
 # Group project "Montpellier biking network simulation"
-![montpellier_biking](image_readme.png)
+![montpellier_biking](image/image_readme.png)
 ## Group members :
  * Alleau Julie : julie.alleau@etu.umontpellier.fr 
  * Chaoui Wiam : wiam.chaoui@etu.umontpellier.fr
