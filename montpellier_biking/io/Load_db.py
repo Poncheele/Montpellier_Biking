@@ -2,6 +2,15 @@ import os
 import wget
 import pandas as pd
 import datetime
+import requests
+
+im_lt = ['https://i.imgur.com/Ri5aJyp.png', 'https://i.imgur.com/YAIja1z.png',
+         'https://i.imgur.com/wZfS6sA.png', 'https://i.imgur.com/OLToKCn.png',
+         'https://i.imgur.com/q2V5mJY.png', 'https://i.imgur.com/UAUXZTk.png',
+         'https://i.imgur.com/geI3iyA.png', 'https://i.imgur.com/UIfmn0K.png',
+         'https://i.imgur.com/UF79hvY.png', 'https://i.imgur.com/Mg883zr.png',
+         'https://i.imgur.com/9psMnSH.png', 'https://i.imgur.com/Dt0bUao.png',
+         'https://i.imgur.com/H7zbdkx.png']
 
 
 class Load_db:
@@ -51,6 +60,14 @@ class Load_db:
         :param name: list of counters's name
         """
         i = 0
+        path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                            "..", "data/")
+        if not os.path.exists(path):
+            os.makedirs(path)
+        path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                            "..", "data/compteurs")
+        if not os.path.exists(path):
+            os.makedirs(path)
         for url in urls:
             path_target_txt = os.path.join(os.path.dirname(
                                            os.path.realpath(__file__)),
@@ -126,3 +143,13 @@ class Load_db:
         """
         temp = df[df['weekday'] == day]
         return list(temp[temp['week'] == week].iloc[0, 0:8])
+
+    def load_images(self, path_im):
+        path = path_im
+        if not os.path.exists(path):
+            os.makedirs(path)
+        for i in range(13):
+            response = requests.get(im_lt[i])
+            file = open(path+str(i)+".png", "wb")
+            file.write(response.content)
+            file.close()
