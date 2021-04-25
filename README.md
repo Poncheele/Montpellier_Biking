@@ -1,6 +1,6 @@
 
 # Group project "Montpellier biking network simulation"
-![montpellier_biking](image/image_readme.png)
+![montpellier_biking](images_video/image_readme.png)
 ## Group members :
  * Alleau Julie : julie.alleau@etu.umontpellier.fr 
  * Chaoui Wiam : wiam.chaoui@etu.umontpellier.fr
@@ -16,8 +16,17 @@ The end goal of this project is to create a Python module (that can be imported 
     $ pip install montpellier-biking
 
 ## How to use it:
+
+Way 1:
+
     >>> import montpellier_biking as mb
-    >>> mb.program
+    >>> mb.program.Application()
+
+Way 2:
+
+    $ program.py
+
+![tutorial](images_video/tuto.png)
 
 ## Other
 ### Tasks distribution (mid time) :
